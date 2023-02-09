@@ -1,0 +1,40 @@
+{
+  "consumer": {
+    "name": "Cart"
+  },
+  "provider": {
+    "name": "Product"
+  },
+  "interactions": [
+    {
+      "description": "a request for product with id 1",
+      "providerState": "Product with id 1 is created and have price",
+      "request": {
+        "method": "POST",
+        "path": "/add-to-cart",
+        "body": {
+          "product_id": 1,
+          "quantity": 1
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+        },
+        "body": {
+          "product_id": 1,
+          "quantity": 1,
+          "name": "Microphone",
+          "description": "Used for podcasting",
+          "final_price": 100,
+          "stock_status": "ADDED_TO_BASKET"
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
