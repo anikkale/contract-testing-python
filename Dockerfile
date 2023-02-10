@@ -1,14 +1,19 @@
-FROM python:latest
+FROM jenkins/jenkins
+
+# Docker install
 USER root
+RUN apt-get update && apt-get install -y \
+       apt-transport-https \
+       ca-certificates \
+       curl \
+       gnupg2 \
+       software-properties-common
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
+RUN apt-key fingerprint 0EBFCD88
+RUN add-apt-repository \
+       "deb [arch=amd64] https://download.docker.com/linux/debian \
+       $(lsb_release -cs) \
+       stable"
+RUN apt-get update && apt-get install -y docker-ce-cli
 
-RUN python --version
-
-# RUN apt-get update && apt-get install -y --no-install-recommends \
-#     python3.10 \
-#     python3-pip \
-#     && \
-#     apt-get clean && \
-#     rm -rf /var/lib/apt/lists/*
-
-# RUN pip3 install nibabel pydicom matplotlib pillow
-# RUN pip3 install med2image
+USER jenkins

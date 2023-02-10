@@ -26,13 +26,12 @@ services:
       PACT_BROKER_BASIC_AUTH_USERNAME: pactbroker
       PACT_BROKER_BASIC_AUTH_PASSWORD: pactbroker
   jenkins:
-    image: jenkins/jenkins:lts
+    build: .
     ports:
       - "8080:8080"
     volumes:
       - jenkins_home:/var/jenkins_home
-  ssh-agent:
-    image: jenkins/ssh-agent
+  privileged: true
 
 volumes:
   postgres-volume:
