@@ -10,24 +10,18 @@
       "description": "a request for product with id 1",
       "providerState": "Product with id 1 is created and have price",
       "request": {
-        "method": "POST",
-        "path": "/add-to-cart",
-        "body": {
-          "product_id": 1,
-          "quantity": 1
-        }
+        "method": "GET",
+        "path": "/product/1"
       },
       "response": {
-        "status": 201,
+        "status": 200,
         "headers": {
         },
         "body": {
-          "product_id": 1,
-          "quantity": 1,
-          "name": "Microphone",
           "description": "Used for podcasting",
-          "final_price": 100,
-          "stock_status": "ADDED_TO_BASKET"
+          "name": "Microphone",
+          "price": 100,
+          "id": 1
         }
       }
     }

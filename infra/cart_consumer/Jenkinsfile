@@ -1,0 +1,43 @@
+pipeline {
+
+    agent { docker { image 'python:3.10.8-alpine' } }
+    stages {
+        stage('build') {
+            steps {
+                sh 'python --version'
+            }
+      }
+    
+      stage('checkout') {
+         steps {
+            checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/anikkale/contract-testing-python']]])
+         }
+      }
+      
+      stage('Install Dependencies') {
+         steps {
+             sh 'npm install'
+        }
+      }
+      
+      stage('Run Consumer Test') {
+         steps {
+             sh 'npm run consumer-service-pact'
+        }
+      }
+      
+      stage('Publish Consumer Pact to Pact Broker') {
+         steps {
+             sh 'node src/rest-api/consumer/consumerPactPublish.js'
+        }
+      }
+
+      stage('Deploy') {
+         steps {
+            sh 'pact-broker can-i-deploy --pacticipant=DateConsumer --broker-base-url=http://pact_broker.com:9292 --latest'
+         }
+      }
+   }
+   
+   
+}

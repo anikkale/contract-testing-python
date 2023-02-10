@@ -36,33 +36,26 @@ class GetProductInfoContract(unittest.TestCase):
         
         mock_host='http://localhost:1234' # this is the mock service just like <external services>
 
-        payload = {
-            "product_id": 1,
-            "quantity": 1,
-        }
         expected = {
-            "product_id": 1,
-            "quantity": 1,
-            "name": "Microphone",
             "description": "Used for podcasting",
-            "final_price": 100,
-            "stock_status": "ADDED_TO_BASKET"
+            "name": "Microphone",
+            "price": 100,
+            "id": 1
         }
 
         (pact
             .given('Product with id 1 is created and have price')
             .upon_receiving('a request for product with id 1')
             .with_request(
-                method='POST', 
-                path='/add-to-cart',
-                body=payload)
-            .will_respond_with(201, body=expected)
+                method='GET', 
+                path='/product/1')
+            .will_respond_with(200, body=expected)
             )
 
         pact.setup()
         with pact:
-            result = requests.post(f'{mock_host}/add-to-cart', json=payload)
+            result = requests.get(f'{mock_host}/product/1')
         
         self.assertEqual(result.json(), expected)
-        self.assertEqual(result.status_code, 201)
+        self.assertEqual(result.status_code, 200)
         pact.verify()

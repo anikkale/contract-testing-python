@@ -12,7 +12,7 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: postgres
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - postgres-volume:/var/lib/postgresql/data
   broker_app:
     image: dius/pact-broker
     ports:
@@ -26,6 +26,15 @@ services:
       PACT_BROKER_DATABASE_NAME: postgres
       PACT_BROKER_BASIC_AUTH_USERNAME: pactbroker
       PACT_BROKER_BASIC_AUTH_PASSWORD: pactbroker
-      
+  jenkins:
+    image: jenkins/jenkins:lts
+    ports:
+      - "8080:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+  ssh-agent:
+    image: jenkins/ssh-agent
+
 volumes:
-  pgdata:
+  postgres-volume:
+  jenkins_home:
