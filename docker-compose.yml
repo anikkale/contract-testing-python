@@ -26,7 +26,7 @@ services:
       PACT_BROKER_BASIC_AUTH_USERNAME: pactbroker
       PACT_BROKER_BASIC_AUTH_PASSWORD: pactbroker
   jenkins:
-    build: .
+    image: jenkins/jenkins:lts
     ports:
       - "8080:8080"
     volumes:
