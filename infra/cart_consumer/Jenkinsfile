@@ -1,16 +1,16 @@
 pipeline {
     agent none
     stages {
-        stage('Build') {
+        stage('Checkout') {
                 //This sh step runs the Python command to compile your application and
                 //its calc library into byte code files, which are placed into the sources workspace directory
-                sh 'python --version'
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: '8d7dbffd-42e3-4d1a-843c-18c9de3115dc', url: 'https://github.com/anikkale/contract-testing-python']])
         }
     
-      stage('checkout') {
+      stage('Build') {
          steps {
-            checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/anikkale/contract-testing-python']]])
-         }
+                sh 'python3 --version'
+            }
       }
       
       stage('Install Dependencies') {
