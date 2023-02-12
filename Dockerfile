@@ -4,7 +4,7 @@ USER root
 
 ENV HOME="/root"
 WORKDIR ${HOME}
-RUN apt-get install && apt-get install -y \
+RUN apt-get update && apt-get install -y \
         git \
         build-essential
 RUN git clone --depth=1 https://github.com/pyenv/pyenv.git .pyenv
