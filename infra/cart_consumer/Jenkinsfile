@@ -7,15 +7,16 @@ pipeline {
             }
          }
     
-      stage('Build') {
+      stage('Install Dependencies') {
          steps {
-                sh 'python3 --version'
+                sh 'pip install -r requirements.txt'
             }
       }
       
-      stage('Install Dependencies') {
+      stage('Run Consumer Test') {
          steps {
-             sh 'npm install'
+             sh 'uvicorn consumer.cart:app --port 8001 --reload'
+             sh 'python -m unittest consumer/tests/test_cart_consumer.py'
         }
       }
       
