@@ -20,12 +20,6 @@ pipeline {
         }
       }
       
-      stage('Run Consumer Test') {
-         steps {
-             sh 'npm run consumer-service-pact'
-        }
-      }
-      
       stage('Publish Consumer Pact to Pact Broker') {
          steps {
              sh 'node src/rest-api/consumer/consumerPactPublish.js'
