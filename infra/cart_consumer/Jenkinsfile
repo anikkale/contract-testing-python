@@ -9,8 +9,8 @@ pipeline {
     
       stage('Install Dependencies') {
          steps {
-                sh 'pip3 install pipenv'
-                sh 'pipenv install'
+                sh 'pip3 install --user pipenv'
+                sh 'pipenv --version'
             }
       }
       
