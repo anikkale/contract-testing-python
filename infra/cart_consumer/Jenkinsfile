@@ -9,8 +9,7 @@ pipeline {
     
       stage('Install Dependencies') {
          steps {
-                sh 'pip3 install --user pipenv'
-                sh 'pipenv --version'
+                sh 'pip3 install -r requirments.txt'
             }
       }
       
