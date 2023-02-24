@@ -27,6 +27,10 @@ jobs:
     - name: Test Consumer Interaction and Generate PACT file
       run: |
         version=${GITHUB_SHA::8} make test_consumer_interaction
+    
+    - name: Check file status
+      run: |
+        ls /github/workflow
         
     - name: Publish the Contract to Pact Broker
       uses: docker://pactfoundation/pact-cli
