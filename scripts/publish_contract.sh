@@ -4,6 +4,6 @@ echo "Publishing the contract to pact broker"
 pact-broker publish ./pacts \
     --consumer-app-version=$1 \
     --branch=main \
-    --broker-base-url=http://localhost:80 \
+    --broker-base-url=$2 \
     --broker-username=pactbroker \
     --broker-password=pactbroker \

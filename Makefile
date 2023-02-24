@@ -11,7 +11,7 @@ test_consumer_interaction:
 	sh scripts/test_cart_consumer.sh
 
 publish_contract:
-	sh scripts/publish_contract.sh ${version}
+	sh scripts/publish_contract.sh ${version} ${broker_base_url}
 
 tag_consumer_contract_as_deployed:
 	sh scripts/tag_consumer_contract.sh ${version}
