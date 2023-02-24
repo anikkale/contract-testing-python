@@ -26,11 +26,11 @@ jobs:
         
     - name: Test Consumer Interaction and Generate PACT file
       run: |
-        ${GITHUB_SHA::8} make test_consumer_interaction
+        version=${GITHUB_SHA::8} make test_consumer_interaction
         
     - name: Publish the Contract to Pact Broker
       run: |
-        ${GITHUB_SHA::8} make publish_contract
+        version=${GITHUB_SHA::8} make publish_contract
         
     - name: Deploy to test
       run: |
@@ -38,4 +38,4 @@ jobs:
 
     - name: Tag the contract with Test after deployment
       run: |
-        ${GITHUB_SHA::8} make tag_consumer_contract_as_deployed
+        version=${GITHUB_SHA::8} make tag_consumer_contract_as_deployed
