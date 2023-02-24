@@ -8,10 +8,12 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    options: --user root
 
     steps:
     # Checkout repository
     - name: Install pact-broker cli
+      options: --user root
       run: |
         sudo apt-get update && apt-get install -y build-essential git gcc
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
