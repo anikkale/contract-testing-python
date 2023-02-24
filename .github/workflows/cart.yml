@@ -32,7 +32,12 @@ jobs:
       uses: docker://pactfoundation/pact-cli
       with:
         args: |
-            version=${GITHUB_SHA::8} broker_base_url=http://host.docker.internal:80 make publish_contract
+            pact-broker publish ./pacts \
+                  --consumer-app-version=${GITHUB_SHA::8} \
+                  --branch=main \
+                  --broker-base-url=http://host.docker.internal:80 \
+                  --broker-username=pactbroker \
+                  --broker-password=pactbroker \
         
     - name: Deploy to test
       run: |
