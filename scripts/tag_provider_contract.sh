@@ -1,4 +1,3 @@
-#!/bin/bash
 
 pact-broker record-deployment \
     --pacticipant Product \
