@@ -35,7 +35,7 @@ jobs:
     - name: Publish the Contract to Pact Broker
       uses: docker://pactfoundation/pact-cli
       with:
-        args: cat pacts/cart-product.json
+        args: ls -l ./pacts
         
     - name: Deploy to test
       run: |
