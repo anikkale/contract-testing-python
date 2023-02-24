@@ -1,6 +1,6 @@
 #!/bin/bash
 # Spinning up the consumer application
-echo "Can-i-Deploy Cart to Prod"
+echo "Can-i-Deploy Cart to Test"
 
 pact-broker can-i-deploy \
     --pacticipant=Cart \

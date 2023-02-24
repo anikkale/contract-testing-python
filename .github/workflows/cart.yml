@@ -6,31 +6,36 @@ on:
     paths:
       - 'consumer/**'
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
+
     steps:
+    # Checkout repository
     - uses: actions/checkout@v2
     
+    # Setting up the Python
     - name: Set up Python 3.10.9
       uses: actions/setup-python@v1
       with:
         python-version: 3.10.9
-        
+    
+    # Installing all the dependencies
     - name: Install dependencies
       run: |
         make install
         
-    - name: Lint with pylint
+    - name: Test Consumer Interaction and Generate PACT file
       run: |
-        make lint
+        ${GITHUB_SHA::8} make test_consumer_interaction
         
-    - name: Test with pytest
+    - name: Publish the Contract to Pact Broker
       run: |
-        make test
+        ${GITHUB_SHA::8} make publish_contract
         
-    - name: Format code
+    - name: Deploy to test
       run: |
-        make format
-    - name: Build Container
+        # Placeholder for deploy
+
+    - name: Tag the contract with Test after deployment
       run: |
-        make build
+        ${GITHUB_SHA::8} make tag_consumer_contract_as_deployed

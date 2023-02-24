@@ -11,13 +11,13 @@ test_consumer_interaction:
 	sh scripts/test_cart_consumer.sh
 
 publish_contract:
-	sh scripts/publish_contract.sh 2.0.0
+	sh scripts/publish_contract.sh ${version}
 
 tag_consumer_contract_as_deployed:
-	sh scripts/tag_consumer_contract.sh 2.0.0
+	sh scripts/tag_consumer_contract.sh ${version}
 
 can_i_deploy_cart:
-	sh scripts/can_i_deploy_cart.sh 2.0.0
+	sh scripts/can_i_deploy_cart.sh ${version}
 
 
 # Provider Commands
@@ -26,10 +26,10 @@ run_provider:
 	uvicorn provider.product:app --port 8000
 
 verify_provider_contract:
-	sh scripts/verify_contract.sh 2.0.0
+	sh scripts/verify_contract.sh ${version}
 
 tag_provider_contract_as_deployed:
-	sh scripts/tag_provider_contract.sh 2.0.0
+	sh scripts/tag_provider_contract.sh ${version}
 
 test:
 	#test
