@@ -21,7 +21,6 @@ jobs:
         brew tap pact-foundation/pact-ruby-standalone
         brew install pact-ruby-standalone
 
-    steps:
     # Checkout repository
     - uses: actions/checkout@v2
     
