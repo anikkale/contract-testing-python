@@ -35,13 +35,7 @@ jobs:
     - name: Publish the Contract to Pact Broker
       uses: docker://pactfoundation/pact-cli
       with:
-        args: |
-            pact-broker publish pacts/cart-product.json \
-                  --consumer-app-version=${GITHUB_SHA::8} \
-                  --branch=main \
-                  --broker-base-url=http://host.docker.internal:80 \
-                  --broker-username=pactbroker \
-                  --broker-password=pactbroker \
+        args: ls -l pacts
         
     - name: Deploy to test
       run: |
