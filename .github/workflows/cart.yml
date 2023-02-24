@@ -36,7 +36,7 @@ jobs:
       uses: docker://pactfoundation/pact-cli
       with:
         args: |
-            ls -l ${PWD}
+            RUN ls -l
         
     - name: Deploy to test
       run: |
