@@ -115,7 +115,7 @@ RUN jenkins-plugin-cli \
 
 USER root
 COPY --from=0 /usr/local  /usr/local
-RUN apt-get update && apt-get install -y \
+RUN sudo apt-get update && apt-get install -y \
           gcc \
           python3-dev
 
