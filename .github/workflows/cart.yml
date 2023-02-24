@@ -36,6 +36,7 @@ jobs:
       uses: docker://pactfoundation/pact-cli
       with:
         args: |
+            ls ${PWD}
             pact-broker publish ${PWD}/pacts \
                   --consumer-app-version=${GITHUB_SHA::8} \
                   --branch=main \
