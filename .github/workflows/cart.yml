@@ -11,6 +11,18 @@ jobs:
 
     steps:
     # Checkout repository
+    - name: Install pact-broker cli
+      run: |
+        apt-get update && apt-get install -y build-essential git
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/h2s/.bashrc
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+        brew doctor
+        brew tap pact-foundation/pact-ruby-standalone
+        brew install pact-ruby-standalone
+
+    steps:
+    # Checkout repository
     - uses: actions/checkout@v2
     
     # Setting up the Python
