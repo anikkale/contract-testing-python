@@ -14,20 +14,16 @@ logging.basicConfig(level=logging.DEBUG)
 
 pact = Consumer('Cart').has_pact_with(
         Provider('Product'),
-        pact_dir='./pact/pacts',
+        pact_dir='./pacts',
         log_dir='./log',
         port=1234,
         host_name='localhost',
-        publish_to_broker=True,
-        broker_base_url = 'http://localhost:80',
-        broker_username='pactbroker',
-        broker_password='pactbroker',
+        publish_to_broker=False,
         )
 
 pact.start_service()
 atexit.register(pact.stop_service)
 
-# PACT_FILE="./pact/pacts/cart-product.json"
 
 class GetProductInfoContract(unittest.TestCase):
 

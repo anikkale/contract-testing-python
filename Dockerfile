@@ -115,29 +115,14 @@ RUN jenkins-plugin-cli \
 
 USER root
 COPY --from=0 /usr/local  /usr/local
+RUN apt-get update && apt-get install -y \
+          gcc \
+          python3-dev
+
+USER root
+RUN apt-get update && apt-get install -y pipenv
+RUN pipenv --version
 RUN python3 --version
 USER jenkins
 
-# ENV HOME="/root"
-# WORKDIR ${HOME}
-# RUN apt-get update && apt-get install -y \
-#         git \
-#         build-essential \
-#         python-setuptools 
-# RUN git clone --depth=1 https://github.com/pyenv/pyenv.git .pyenv
-# ENV PYENV_ROOT="${HOME}/.pyenv"
-# ENV PATH="${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${PATH}"
-
-# ENV PYTHON_VERSION=3.10.9
-# RUN pyenv install ${PYTHON_VERSION}
-# RUN pyenv global ${PYTHON_VERSION}
-
-# Python install
-# RUN apt-get update
-# RUN apt-get install -y \
-#         software-properties-common
-
-# # RUN add-apt-repository ppa:deadsnakes/ppa
-
-# RUN apt-get update && apt-get install -y python3.10
 
