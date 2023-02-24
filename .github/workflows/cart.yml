@@ -30,7 +30,7 @@ jobs:
     
     - name: Check file status
       run: |
-        ls ${PWD}
+        ls ${PWD}/pacts
         
     - name: Publish the Contract to Pact Broker
       uses: docker://pactfoundation/pact-cli
