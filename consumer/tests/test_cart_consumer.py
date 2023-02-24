@@ -27,7 +27,6 @@ atexit.register(pact.stop_service)
 
 class GetProductInfoContract(unittest.TestCase):
 
-
     def test_get_product_info(self):
         
         mock_host='http://localhost:1234' # this is the mock service just like <external services>
