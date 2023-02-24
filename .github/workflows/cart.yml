@@ -34,7 +34,7 @@ jobs:
       with:
         args: pact-broker publish ./pacts --consumer-app-version=${GITHUB_SHA::8} \
                   --branch=main \
-                  --broker-base-url=http://172.26.0.3:9292 \
+                  --broker-base-url=http://0.0.0.0:9292 \
                   --broker-username=pactbroker \
                   --broker-password=pactbroker \
         
