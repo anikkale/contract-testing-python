@@ -30,9 +30,8 @@ jobs:
         
     - name: Publish the Contract to Pact Broker
       uses: docker://pactfoundation/pact-broker
-      run: |
-        pact-broker --help
-        version=${GITHUB_SHA::8} make publish_contract
+      with:
+        args: version=${GITHUB_SHA::8} make publish_contract
         
     - name: Deploy to test
       run: |
