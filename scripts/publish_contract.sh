@@ -1,4 +1,3 @@
-#!/bin/bash
 # Spinning up the consumer application
 echo "Publishing the contract to pact broker"
 
