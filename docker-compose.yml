@@ -2,30 +2,46 @@ version: '3'
 services:
   postgres:
     image: postgres
+    networks:
+      main:
+        aliases:
+          - postgres
     healthcheck:
       test: psql postgres --command "select 1" -U postgres
     ports:
-      - 5432:5432
+      - "5432:5432"
+    volumes:
+      - postgres-volume:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: postgres
-    volumes:
-      - postgres-volume:/var/lib/postgresql/data
-  broker_app:
+  pact_broker:
     image: pactfoundation/pact-broker
+    networks:
+      main:
+        aliases:
+          - pact_broker
     ports:
-      - 9292:9292
-    links:
+      - "9292:9292"
+    depends_on:
       - postgres
     environment:
-      PACT_BROKER_PORT: '9292'
-      PACT_BROKER_DATABASE_USERNAME: postgres
+      PACT_BROKER_DATABASE_URL_ENVIRONMENT_VARIABLE_NAME: DATABASE_URL
+      DATABASE_URL: "postgres://postgres:password@postgres/postgres"
+      PACT_BROKER_DATABASE_USERNAME: postgres 
       PACT_BROKER_DATABASE_PASSWORD: password
       PACT_BROKER_DATABASE_HOST: postgres
       PACT_BROKER_DATABASE_NAME: postgres
+      PACT_BROKER_PORT: "9292"
+      PACT_BROKER_LOG_LEVEL: INFO
+      PACT_BROKER_WEBHOOK_HOST_WHITELIST: "web"
+      PACT_BROKER_WEBHOOK_SCHEME_WHITELIST: http
+      PACT_BROKER_WEBHOOK_HTTP_METHOD_WHITELIST: "POST"
       PACT_BROKER_BASIC_AUTH_USERNAME: pactbroker
       PACT_BROKER_BASIC_AUTH_PASSWORD: pactbroker
-      PACT_BROKER_BASE_URL: 'https://localhost http://localhost http://localhost:9292 http://pact-broker:9292 https://host.docker.internal http://host.docker.internal http://host.docker.internal:9292'
+      # PACT_BROKER_BASE_URL: 'https://localhost http://localhost http://localhost:9292 http://pact-broker:9292 https://host.docker.internal http://host.docker.internal http://host.docker.internal:9292'
+networks:
+  main:
 volumes:
   postgres-volume:
