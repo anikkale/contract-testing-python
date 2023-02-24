@@ -3,8 +3,8 @@ on:
   push:
     branches: 
       - main
-    paths:
-      - 'consumer/**'
+    # paths:
+    #   - 'consumer/**'
 jobs:
   publish:
     runs-on: ubuntu-latest
