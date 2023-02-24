@@ -31,7 +31,12 @@ jobs:
     - name: Publish the Contract to Pact Broker
       uses: docker://pactfoundation/pact-broker
       with:
-        args: version=${GITHUB_SHA::8} make publish_contract
+        args: pact-broker publish ./pacts \
+                  --consumer-app-version=${GITHUB_SHA::8} \
+                  --branch=main \
+                  --broker-base-url=http://localhost:80 \
+                  --broker-username=pactbroker \
+                  --broker-password=pactbroker \
         
     - name: Deploy to test
       run: |
