@@ -36,7 +36,7 @@ jobs:
       uses: docker://pactfoundation/pact-cli
       with:
         args: |
-            pact-broker publish pacts/* \
+            pact-broker publish pacts/cart-product.json \
                   --consumer-app-version=${GITHUB_SHA::8} \
                   --branch=main \
                   --broker-base-url=http://host.docker.internal:80 \
