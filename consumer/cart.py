@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 import requests
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
+from pydantic import BaseModel, Field
 
 
 app = FastAPI()
@@ -19,6 +20,11 @@ def read_db():
     finally:
         db.close()
 
+# Call Provider service
+def get_product_info(base_url,product_id):
+    res = requests.get(f'{base_url}/product/{product_id}')
+    return res.json()
+
 @app.get("/")
 def get_items(db: Session = Depends(read_db)):
     return db.query(cart_model.Carts).all()
@@ -26,9 +32,7 @@ def get_items(db: Session = Depends(read_db)):
 @app.post("/add-to-cart")
 def add_to_cart(response: Response,cart: cart_schema.Cart, db: Session = Depends(read_db)):
     cart_columns = cart_model.Carts()
-    res = requests.get(f'http://localhost:8000/product/{cart.product_id}')
-    product_info = res.json()
-    
+    product_info = get_product_info('http://localhost:8000',cart.product_id)
     cart_columns.product_id = cart.product_id
     cart_columns.name = product_info['name']
     cart_columns.description = product_info['description']

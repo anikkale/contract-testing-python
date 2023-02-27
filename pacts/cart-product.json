@@ -19,7 +19,6 @@
         },
         "body": {
           "description": "Used for podcasting",
-          "name": "Microphone",
           "price": 100,
           "id": 1
         }

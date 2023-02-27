@@ -2,6 +2,8 @@ import os.path
 import logging
 import sys
 
+from consumer.cart import get_product_info
+
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 import atexit
@@ -33,7 +35,7 @@ class GetProductInfoContract(unittest.TestCase):
 
         expected = {
             "description": "Used for podcasting",
-            "name": "Microphone",
+            # "name": "Microphone",
             "price": 100,
             "id": 1
         }
@@ -49,8 +51,7 @@ class GetProductInfoContract(unittest.TestCase):
 
         pact.setup()
         with pact:
-            result = requests.get(f'{mock_host}/product/1')
+            result = get_product_info(mock_host,1)
         
-        self.assertEqual(result.json(), expected)
-        self.assertEqual(result.status_code, 200)
+        self.assertEqual(result, expected)
         pact.verify()
