@@ -34,8 +34,7 @@ class GetProductInfoContract(unittest.TestCase):
         mock_host='http://localhost:1234' # this is the mock service just like <external services>
 
         expected = {
-            "description": "Used for podcasting",
-            # "name": "Microphone",
+            "name": "Microphone",
             "price": 100,
             "id": 1
         }

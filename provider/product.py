@@ -25,7 +25,12 @@ def get_product(response: Response, item_id: int, db: Session = Depends(read_db)
     if item_model is None:
         response.status_code = status.HTTP_404_NOT_FOUND
     else:
-        return item_model
+        return {
+                "product_id": item_model.id,
+                "name": item_model.name, 
+                "price": item_model.price,
+                "description": item_model.description
+            }
 
 @app.post("/product")
 def add_product(response: Response, item: product_schema.Product, db: Session = Depends(read_db)):
