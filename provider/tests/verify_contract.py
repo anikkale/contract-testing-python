@@ -1,15 +1,13 @@
 import os
 from pact import Verifier
 
-# const broker_opts={
-#         "broker_username": PACT_BROKER_USERNAME,
-#         "broker_password": PACT_BROKER_PASSWORD,
-#         "broker_url": PACT_BROKER_URL,
-#         "publish_version": "3",
-#         "publish_verification_results": True,
-#     }
 verifier = Verifier(provider='Product',
                     provider_base_url="http://localhost:8000",)
+
+# # Using a local pact file
+
+# success, logs = verifier.verify_pacts('./userserviceclient-userservice.json')
+# assert success == 0
 
 success, logs = verifier.verify_with_broker(
                     broker_url="http://localhost:9292",

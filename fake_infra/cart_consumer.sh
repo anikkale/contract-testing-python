@@ -9,9 +9,6 @@ GIT_COMMIT_SHA=$(git rev-parse --short HEAD)
 echo -e "\n${GREEN}=>=>=> Running the Pipeline for the Consumer Cart ${GIT_COMMIT_SHA} <=<=<=${NC}\n"
 
 
-echo -e "\n${YELLOW}=>=>=> Installing Dependency <=<=<=${NC}\n"
-make install
-
 echo -e "\n${YELLOW}=>=>=> Test Consumer interaction and Generate Pact File <=<=<=${NC}\n"
 make test_consumer_interaction
 

@@ -36,7 +36,7 @@ class GetProductInfoContract(unittest.TestCase):
         expected = {
             "name": "Microphone",
             "price": 100,
-            "id": 1
+            "product_id": 1
         }
 
         (pact
