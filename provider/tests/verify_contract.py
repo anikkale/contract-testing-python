@@ -6,7 +6,7 @@ verifier = Verifier(provider='Product',
 
 # # Using a local pact file
 
-# success, logs = verifier.verify_pacts('./userserviceclient-userservice.json')
+# success, logs = verifier.verify_pacts('./pacts/cart-product.json')
 # assert success == 0
 
 success, logs = verifier.verify_with_broker(
